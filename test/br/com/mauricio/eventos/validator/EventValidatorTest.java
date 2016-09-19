@@ -1,11 +1,13 @@
 package br.com.mauricio.eventos.validator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
 
 import br.com.mauricio.eventos.exception.ValidationBusinessException;
 import br.com.mauricio.eventos.exception.ValidationMandatoryException;
@@ -47,21 +49,63 @@ public class EventValidatorTest {
 	@Test
 	public void shouldNotThrowValidatioMandatoryExceptionWhenValidateEventWithDate(){
 		Event event = new Event();
-		event.setEventDate(LocalDateTime.now());
+		event.setEventDate(LocalDate.now());
 		
 		validator.validateDateMandatory(event);
 	}
 	
 	@Test
-	public void shouldSetErrorMensagemWhenValidateEventWithNameLowerThanMinimumCharacters(){
+	public void shouldSetErrorMessageWhenValidateEventWithNameMoreThanMaxCharacters(){
 		Event event = new Event();
-		event.setName("event test");
+		event.setName(RandomStringUtils.random(151));
+		
 		try {
-			validator.validateMinimumNameCharacters(event);
+			validator.validateMaxNameCharacters(event);
 			fail("should throw exception");
 		} catch (ValidationBusinessException e) {
-			assertEquals("O nome do evento deve conter no mínimo 150 caracteres", e.getMessage());
+			assertEquals("O nome permite no máximo 150 caracteres", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void shouldNotSetErrorMessageWhenValidateEventWithNameLowerThanMaxCharacters(){
+		Event event = new Event();
+		event.setName(RandomStringUtils.random(100));
+		
+		validator.validateMaxNameCharacters(event);
+	}
+	
+	@Test
+	public void shouldSetErrorMessageWhenValidateEventWithDataLowerThanToday(){
+		LocalDate yesterday = LocalDate.now().minusDays(1);
+		Event event = new Event();
+		event.setEventDate(yesterday);
+		
+		try {
+			validator.validateDateForCreate(event);
+			fail("should throw exception");
+		} catch (ValidationBusinessException e) {
+			assertEquals("A data do evento deve ser igual ou maior que a de hoje", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void shouldNotSetErrorMessageWhenValidadeEventWithDateFromToday(){
+		LocalDate today = LocalDate.now();
+		Event event = new Event();
+		event.setEventDate(today);
+		
+		validator.validateDateForCreate(event);
+	}
+	
+	
+	@Test
+	public void shouldNotSetErrorMesssageWhenValidateEventWithDateGreaterThanToday(){
+		LocalDate tomorrow = LocalDate.now();
+		Event event = new Event();
+		event.setEventDate(tomorrow);
+		
+		validator.validateDateForCreate(event);
 	}
 	
 	

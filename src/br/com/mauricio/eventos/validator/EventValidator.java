@@ -1,6 +1,7 @@
 package br.com.mauricio.eventos.validator;
 
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.LocalDate;
 
 import br.com.mauricio.eventos.exception.ValidationBusinessException;
 import br.com.mauricio.eventos.exception.ValidationMandatoryException;
@@ -8,9 +9,19 @@ import br.com.mauricio.eventos.model.Event;
 
 public class EventValidator {
 
-	private static final int MINIMUM_NAME_CHARACTERS = 150;
-	private static final String MINIMUM_NAME_CHARACTERS_MESSAGE = "O nome do evento deve conter no mínimo 150 caracteres";
+	private static final LocalDate TODAY = LocalDate.now();
+	private static final String DATE_FOR_CREATE_MESSAGE = "A data do evento deve ser igual ou maior que a de hoje";
+	private static final int MAX_NAME_CHARACTERS = 150;
+	private static final String MAX_NAME_CHARACTERS_MESSAGE = "O nome permite no máximo 150 caracteres";
 
+	public void validate(Event event) {
+		validateNameMandatory(event);
+		validateDateMandatory(event);
+		validateMaxNameCharacters(event);
+		validateDateForCreate(event);
+	}
+	
+	
 	public void validateNameMandatory(Event event) {
 		if(StringUtils.isEmpty(event.getName()))
 			throw new ValidationMandatoryException();
@@ -21,11 +32,18 @@ public class EventValidator {
 			throw new ValidationMandatoryException();
 	}
 
-	public void validateMinimumNameCharacters(Event event) {
-		if(event.getName().length() < MINIMUM_NAME_CHARACTERS)
-			throw new ValidationBusinessException(MINIMUM_NAME_CHARACTERS_MESSAGE);
+	public void validateMaxNameCharacters(Event event) {
+		if(event.getName().length() > MAX_NAME_CHARACTERS)
+			throw new ValidationBusinessException(MAX_NAME_CHARACTERS_MESSAGE);
 		
 	}
+
+	public void validateDateForCreate(Event event) {
+		if(event.getEventDate().isBefore(TODAY))
+			throw new ValidationBusinessException(DATE_FOR_CREATE_MESSAGE);
+	}
+
+
 	
 	
 	

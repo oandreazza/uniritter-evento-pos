@@ -1,18 +1,18 @@
 package br.com.mauricio.eventos.model;
 
-import org.joda.time.LocalDateTime;
+import org.joda.time.LocalDate;
 
 public class Event {
 	
 	private String name;
 	
-	private LocalDateTime eventDate;
+	private LocalDate eventDate;
 
-	public LocalDateTime getEventDate() {
+	public LocalDate getEventDate() {
 		return eventDate;
 	}
 
-	public void setEventDate(LocalDateTime eventDate) {
+	public void setEventDate(LocalDate eventDate) {
 		this.eventDate = eventDate;
 	}
 
