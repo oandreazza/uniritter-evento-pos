@@ -2,7 +2,7 @@ package br.com.mauricio.eventos.model;
 
 import org.joda.time.LocalDate;
 
-public class Event {
+public class Event implements Model {
 	
 	private String name;
 	

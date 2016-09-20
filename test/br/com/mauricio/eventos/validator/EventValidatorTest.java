@@ -5,7 +5,6 @@ import static org.junit.Assert.fail;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 
