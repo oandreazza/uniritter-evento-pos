@@ -13,8 +13,17 @@ public class EventService {
 	
 	
 	
+	
 	public void save(Event event){
-		this.validator.validate(event);
+		
+	}
+
+
+
+
+	public void create(Event event) {
+		validator.validate(event);
+		save(event);
 	}
 
 }
