@@ -10,7 +10,11 @@ import org.junit.Test;
 
 import br.com.mauricio.eventos.exception.ValidationBusinessException;
 import br.com.mauricio.eventos.exception.ValidationMandatoryException;
+import br.com.mauricio.eventos.fixture.EventFixture;
+import br.com.mauricio.eventos.model.AudienceVIP;
+import br.com.mauricio.eventos.model.Backstage;
 import br.com.mauricio.eventos.model.Event;
+import br.com.mauricio.eventos.model.VIP;
 
 public class EventValidatorTest {
 
@@ -105,6 +109,20 @@ public class EventValidatorTest {
 		event.setEventDate(tomorrow);
 		
 		validator.validateDateBeforeTodayForCreateEvent(event);
+	}
+	
+	@Test(expected = ValidationBusinessException.class)
+	public void shouldThrowBusinessExceptionWhenCreateEventWithDuplicatedTickets(){
+		Event event = EventFixture.get().withTickets(new VIP(), new VIP(), new Backstage()).build();
+		
+		validator.validateDuplicatedTicketsWhenCreate(event);
+	}
+	
+	@Test
+	public void shouldNotTrhowBusinessExceptionWhenCreateEvenWithNoDuplicatedTickets(){
+		Event event = EventFixture.get().withTickets(new VIP(), new AudienceVIP(), new Backstage()).build();
+		
+		validator.validateDuplicatedTicketsWhenCreate(event);	
 	}
 	
 	

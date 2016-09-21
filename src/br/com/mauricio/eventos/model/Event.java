@@ -10,6 +10,10 @@ public class Event {
 	
 	private LocalDate eventDate;
 	
+	private LocalDate initialSale;
+	
+	private LocalDate endSale;
+	
 	private List<Ticket> tickets;
 
 	public LocalDate getEventDate() {
@@ -35,4 +39,22 @@ public class Event {
 	public void setTickets(List<Ticket> tickets) {
 		this.tickets = tickets;
 	}
+
+	public LocalDate getInitialSale() {
+		return initialSale;
+	}
+
+	public void setInitialSale(LocalDate initialSale) {
+		this.initialSale = initialSale;
+	}
+
+	public LocalDate getEndSale() {
+		return endSale;
+	}
+
+	public void setEndSale(LocalDate endSale) {
+		this.endSale = endSale;
+	}
+
+
 }

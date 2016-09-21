@@ -1,11 +1,15 @@
 package br.com.mauricio.eventos.validator;
 
+import java.util.List;
+import static java.util.stream.Collectors.*;
+
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.LocalDate;
 
 import br.com.mauricio.eventos.exception.ValidationBusinessException;
 import br.com.mauricio.eventos.exception.ValidationMandatoryException;
 import br.com.mauricio.eventos.model.Event;
+import br.com.mauricio.eventos.model.Ticket;
 
 public class EventValidator {
 
@@ -41,6 +45,15 @@ public class EventValidator {
 	public void validateDateBeforeTodayForCreateEvent(Event event) {
 		if(event.getEventDate().isBefore(TODAY))
 			throw new ValidationBusinessException(DATE_FOR_CREATE_MESSAGE);
+	}
+
+
+	public void validateDuplicatedTicketsWhenCreate(Event event) {
+		List<Ticket> ticketList = event.getTickets();
+		
+		boolean hasDuplicatedTickets = !ticketList.stream().collect(groupingBy(e -> e.getClass(), counting())).entrySet().stream().filter(i -> i.getValue() > 1).collect(toList()).isEmpty();
+		if(hasDuplicatedTickets)
+			throw new ValidationBusinessException();
 	}
 
 

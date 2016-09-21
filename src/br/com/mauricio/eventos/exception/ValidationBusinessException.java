@@ -11,4 +11,9 @@ public class ValidationBusinessException extends RuntimeException {
 	}
 
 
+	public ValidationBusinessException() {
+		super();
+	}
+
+
 }
