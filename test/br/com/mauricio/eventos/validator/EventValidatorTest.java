@@ -81,7 +81,7 @@ public class EventValidatorTest {
 		event.setEventDate(yesterday);
 		
 		try {
-			validator.validateDateForCreate(event);
+			validator.validateDateBeforeTodayForCreateEvent(event);
 			fail("should throw exception");
 		} catch (ValidationBusinessException e) {
 			assertEquals("A data do evento deve ser igual ou maior que a de hoje", e.getMessage());
@@ -94,7 +94,7 @@ public class EventValidatorTest {
 		Event event = new Event();
 		event.setEventDate(today);
 		
-		validator.validateDateForCreate(event);
+		validator.validateDateBeforeTodayForCreateEvent(event);
 	}
 	
 	
@@ -104,7 +104,7 @@ public class EventValidatorTest {
 		Event event = new Event();
 		event.setEventDate(tomorrow);
 		
-		validator.validateDateForCreate(event);
+		validator.validateDateBeforeTodayForCreateEvent(event);
 	}
 	
 	

@@ -1,5 +1,8 @@
 package br.com.mauricio.eventos.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.mauricio.eventos.dao.Dao;
 import br.com.mauricio.eventos.model.Event;
 import br.com.mauricio.eventos.validator.EventValidator;
@@ -21,6 +24,22 @@ public class EventService {
 	
 	public void save(Event event){
 		dao.save(event);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<Event> listLastFiveEvents(){
+		List<Event> eventList = dao.listAll();
+		
+		return eventList.stream().limit(5).collect(Collectors.toList());
+		
+		
 	}
 
 

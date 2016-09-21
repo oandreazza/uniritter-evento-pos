@@ -18,7 +18,7 @@ public class EventValidator {
 		validateNameMandatory(event);
 		validateDateMandatory(event);
 		validateMaxNameCharacters(event);
-		validateDateForCreate(event);
+		validateDateBeforeTodayForCreateEvent(event);
 	}
 	
 	
@@ -38,7 +38,7 @@ public class EventValidator {
 		
 	}
 
-	public void validateDateForCreate(Event event) {
+	public void validateDateBeforeTodayForCreateEvent(Event event) {
 		if(event.getEventDate().isBefore(TODAY))
 			throw new ValidationBusinessException(DATE_FOR_CREATE_MESSAGE);
 	}
