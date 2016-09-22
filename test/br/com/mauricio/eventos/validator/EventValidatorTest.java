@@ -125,6 +125,11 @@ public class EventValidatorTest {
 		validator.validateDuplicatedTicketsWhenCreate(event);	
 	}
 	
+	@Test
+	public void shouldSetErrorMessageWhenValidadeEventWithInitialSaleAfterEndSaleDate(){
+		
+	}
+	
 	
 
 }

@@ -23,6 +23,7 @@ public class EventValidator {
 		validateDateMandatory(event);
 		validateMaxNameCharacters(event);
 		validateDateBeforeTodayWhenCreateEvent(event);
+		validateDuplicatedTicketsWhenCreate(event);
 	}
 	
 	
@@ -55,6 +56,8 @@ public class EventValidator {
 		if(hasDuplicatedTickets)
 			throw new ValidationBusinessException();
 	}
+	
+	
 
 
 	
