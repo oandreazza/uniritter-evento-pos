@@ -16,12 +16,18 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="compile" depends="clean">
+    <target name="compile-src" depends="clean">
         <mkdir dir="${classes.dir}"/>
         <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath"  includeantruntime="true"/>
     </target>
+    
+    <target name="compile-test" depends="compile-src">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${test.dir}" destdir="${classes.dir}" classpathref="classpath"  includeantruntime="true"/>
+    </target>
 
-    <target name="jar" depends="compile">
+
+    <target name="jar" depends="compile-test">
         <mkdir dir="${jar.dir}"/>
          <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}" />
     </target>
@@ -34,7 +40,7 @@
             </classpath>
             <batchtest fork="yes">
                 <fileset dir="${test.dir}">
-                    <include name="**/EventValidatorTest*.java"/>
+                    <include name="**/*Test*.java"/>
                 </fileset>
             </batchtest>
         </junit>
