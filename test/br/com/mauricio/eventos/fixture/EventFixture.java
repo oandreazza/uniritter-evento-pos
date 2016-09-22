@@ -2,6 +2,8 @@ package br.com.mauricio.eventos.fixture;
 
 import java.util.Arrays;
 
+import org.joda.time.LocalDate;
+
 import br.com.mauricio.eventos.model.Event;
 import br.com.mauricio.eventos.model.Ticket;
 
@@ -23,6 +25,18 @@ public class EventFixture {
 
 	public Event build() {
 		return this.event;
+	}
+
+
+	public EventFixture withInitialDateSale(LocalDate initialSale) {
+		this.event.setInitialSale(initialSale);
+		return this;
+	}
+
+
+	public EventFixture withEndDateSale(LocalDate endSale) {
+		this.event.setEndSale(endSale);
+		return this;
 	}
 
 }

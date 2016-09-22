@@ -127,7 +127,35 @@ public class EventValidatorTest {
 	
 	@Test
 	public void shouldSetErrorMessageWhenValidadeEventWithInitialSaleAfterEndSaleDate(){
+		LocalDate today = LocalDate.now();
+		LocalDate tomorrow = today.plusDays(1);
+		Event event = EventFixture.get().withInitialDateSale(tomorrow).withEndDateSale(today).build();
 		
+		try{
+			validator.validateSaleDatePeriod(event);
+			fail("Should throw ValidationBusinessException");
+		}catch (ValidationBusinessException e){
+			assertEquals("A data de início de venda deve ser inferior a data de fim", e.getMessage());
+		}
+		
+	}
+	
+	@Test
+	public void shouldPermitCreateEventWithSameDateSale(){
+		LocalDate today = LocalDate.now();
+		Event event = EventFixture.get().withInitialDateSale(today).withEndDateSale(today).build();
+		
+		validator.validateSaleDatePeriod(event);
+		
+	}
+	
+	@Test
+	public void shouldPermitCreateEventWithInitialDateBeforeEndDate(){
+		LocalDate today = LocalDate.now();
+		LocalDate tomorrow = today.plusDays(1);
+		Event event = EventFixture.get().withInitialDateSale(today).withEndDateSale(tomorrow).build();
+		
+		validator.validateSaleDatePeriod(event);
 	}
 	
 	

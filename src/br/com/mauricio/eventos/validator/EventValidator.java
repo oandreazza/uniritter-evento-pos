@@ -13,8 +13,9 @@ import br.com.mauricio.eventos.model.Ticket;
 
 public class EventValidator {
 
+	private static final String INVALID_DATE_SALE_PERIOD_MESSAGE = "A data de início de venda deve ser inferior a data de fim";
 	private static final LocalDate TODAY = LocalDate.now();
-	private static final String DATE_FOR_CREATE_MESSAGE = "A data do evento deve ser igual ou maior que a de hoje";
+	private static final String INVALID_DATE_EVENT_MESSAGE = "A data do evento deve ser igual ou maior que a de hoje";
 	private static final int MAX_NAME_CHARACTERS = 150;
 	private static final String MAX_NAME_CHARACTERS_MESSAGE = "O nome permite no máximo 150 caracteres";
 
@@ -45,7 +46,7 @@ public class EventValidator {
 
 	public void validateDateBeforeTodayWhenCreateEvent(Event event) {
 		if(event.getEventDate().isBefore(TODAY))
-			throw new ValidationBusinessException(DATE_FOR_CREATE_MESSAGE);
+			throw new ValidationBusinessException(INVALID_DATE_EVENT_MESSAGE);
 	}
 
 
@@ -55,6 +56,12 @@ public class EventValidator {
 		boolean hasDuplicatedTickets = !ticketList.stream().collect(groupingBy(e -> e.getClass(), counting())).entrySet().stream().filter(i -> i.getValue() > 1).collect(toList()).isEmpty();
 		if(hasDuplicatedTickets)
 			throw new ValidationBusinessException();
+	}
+
+
+	public void validateSaleDatePeriod(Event event) {
+		if(event.getInitialSale().isAfter(event.getEndSale()))
+			throw new ValidationBusinessException(INVALID_DATE_SALE_PERIOD_MESSAGE);
 	}
 	
 	
