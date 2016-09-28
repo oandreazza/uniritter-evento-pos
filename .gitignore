@@ -1,4 +1,4 @@
 .DS_Store
 .project
 bin/
-build/*.class
+build/
