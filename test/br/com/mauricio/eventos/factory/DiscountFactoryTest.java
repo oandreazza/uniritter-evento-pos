@@ -9,6 +9,7 @@ import br.com.mauricio.eventos.model.Discount;
 import br.com.mauricio.eventos.model.ElderDiscount;
 import br.com.mauricio.eventos.model.MemberGoldDiscount;
 import br.com.mauricio.eventos.model.MemberSilverDiscount;
+import br.com.mauricio.eventos.model.NoDiscount;
 import br.com.mauricio.eventos.model.StudentDiscount;
 import br.com.mauricio.eventos.model.Purchaser;
 
@@ -43,6 +44,15 @@ public class DiscountFactoryTest {
 		discount = DiscountFactory.build(Purchaser.MEMBER_SILVER);
 		
 		assertThat(discount, instanceOf(MemberSilverDiscount.class));
+	}
+	
+	@Test
+	public void shouldReturnNoDiscountWhenPurchaserGeneral(){
+		discount = DiscountFactory.build(Purchaser.GENERAL);
+		
+		assertThat(discount, instanceOf(NoDiscount.class));
+		
+		
 	}
 	
 	

@@ -4,6 +4,7 @@ import br.com.mauricio.eventos.model.Discount;
 import br.com.mauricio.eventos.model.ElderDiscount;
 import br.com.mauricio.eventos.model.MemberGoldDiscount;
 import br.com.mauricio.eventos.model.MemberSilverDiscount;
+import br.com.mauricio.eventos.model.NoDiscount;
 import br.com.mauricio.eventos.model.StudentDiscount;
 import br.com.mauricio.eventos.model.Purchaser;
 
@@ -21,10 +22,9 @@ public class DiscountFactory {
 		case MEMBER_SILVER:
 			return new MemberSilverDiscount();
 		default:
-			break;
+			return new NoDiscount();
 		}
 		
-		return null;
 	}
 
 }
