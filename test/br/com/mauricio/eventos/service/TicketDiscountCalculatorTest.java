@@ -1,22 +1,30 @@
 package br.com.mauricio.eventos.service;
 
-import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
 
+import org.junit.Before;
 import org.junit.Test;
-
-import br.com.mauricio.eventos.model.Purchaser;
-import br.com.mauricio.eventos.model.tickets.Audience;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 public class TicketDiscountCalculatorTest {
 
-
+	@Mock
+	private DiscountStrategy defaultDiscountStrategy;
+	private TicketDiscountCalculator ticketCalculator;
 	
+	@Before
+	public void setup(){
+		MockitoAnnotations.initMocks(this);
+		ticketCalculator = new TicketDiscountCalculator(defaultDiscountStrategy);		
+	}
 	
 	@Test
-	public void shouldCalculateDiscountOnTicketFromPurchaser(){
-		TicketDiscountCalculator ticketCalculator = new TicketDiscountCalculator(new Audience(), Purchaser.STUDENT );
+	public void shouldGetValueFromStrategyDiscount(){
+		ticketCalculator.getValue();
 		
-		assertEquals(150.00, ticketCalculator.calculate(),2);
+		verify(defaultDiscountStrategy).calcule();
+		
 	}
 
 }
