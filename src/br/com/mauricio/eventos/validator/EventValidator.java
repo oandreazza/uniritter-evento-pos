@@ -9,7 +9,7 @@ import org.joda.time.LocalDate;
 import br.com.mauricio.eventos.exception.ValidationBusinessException;
 import br.com.mauricio.eventos.exception.ValidationMandatoryException;
 import br.com.mauricio.eventos.model.Event;
-import br.com.mauricio.eventos.model.Ticket;
+import br.com.mauricio.eventos.model.tickets.Ticket;
 
 public class EventValidator {
 

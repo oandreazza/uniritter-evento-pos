@@ -1,4 +1,4 @@
-package br.com.mauricio.eventos.model;
+package br.com.mauricio.eventos.model.tickets;
 
 public class Backstage implements Ticket {
 

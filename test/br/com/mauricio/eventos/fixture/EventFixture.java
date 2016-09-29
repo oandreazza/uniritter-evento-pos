@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.joda.time.LocalDate;
 
 import br.com.mauricio.eventos.model.Event;
-import br.com.mauricio.eventos.model.Ticket;
+import br.com.mauricio.eventos.model.tickets.Ticket;
 
 public class EventFixture {
 

@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import br.com.mauricio.eventos.model.Audience;
 import br.com.mauricio.eventos.model.Purchaser;
+import br.com.mauricio.eventos.model.tickets.Audience;
 
 public class TicketDiscountCalculatorTest {
 

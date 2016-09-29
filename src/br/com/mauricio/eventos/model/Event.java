@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.joda.time.LocalDate;
 
+import br.com.mauricio.eventos.model.tickets.Ticket;
+
 public class Event {
 	
 	private String name;

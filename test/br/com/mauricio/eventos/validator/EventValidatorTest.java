@@ -11,10 +11,10 @@ import org.junit.Test;
 import br.com.mauricio.eventos.exception.ValidationBusinessException;
 import br.com.mauricio.eventos.exception.ValidationMandatoryException;
 import br.com.mauricio.eventos.fixture.EventFixture;
-import br.com.mauricio.eventos.model.AudienceVIP;
-import br.com.mauricio.eventos.model.Backstage;
 import br.com.mauricio.eventos.model.Event;
-import br.com.mauricio.eventos.model.VIP;
+import br.com.mauricio.eventos.model.tickets.AudienceVIP;
+import br.com.mauricio.eventos.model.tickets.Backstage;
+import br.com.mauricio.eventos.model.tickets.VIP;
 
 public class EventValidatorTest {
 
